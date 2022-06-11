@@ -1,7 +1,6 @@
-from typing import Any
-
-from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
-from fastapi.templating import Jinja2Templates
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import FileResponse
 
 from app.config import basedir
 from app.connection import connection_manager
@@ -9,9 +8,9 @@ from app.redis import redis_manager
 from app.schemas import History
 
 router = APIRouter()
-
-
-templates = Jinja2Templates(directory=basedir / 'app' / 'templates')
+router.mount(
+    '/static', StaticFiles(directory=basedir / 'app' / 'static'), name='static'
+)
 
 
 @router.on_event('startup')
@@ -25,13 +24,13 @@ async def disconnect_redis() -> None:  # noqa: F811
 
 
 @router.get('/')
-def get_home(request: Request) -> Any:  # pragma: no cover (rendering template)
-    return templates.TemplateResponse('home.html', {'request': request})
+def get_home() -> FileResponse:  # pragma: no cover (rendering template)
+    return FileResponse('static/home.html')
 
 
 @router.get('/chat')
-def get_chat(request: Request) -> Any:  # pragma: no cover (rendering template)
-    return templates.TemplateResponse('chat.html', {'request': request})
+def get_chat() -> FileResponse:  # pragma: no cover (rendering template)
+    return FileResponse('static/chat.html')
 
 
 @router.get(
