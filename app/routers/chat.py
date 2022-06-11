@@ -75,9 +75,6 @@ async def chat(websocket: WebSocket, user_name: str) -> None:
             'sender': user_name,
             'message': 'left our chat :(',
         }
-        await redis_manager.publish_message(
-            message_data['sender'], message_data['message']
-        )
         await redis_manager.save_message(
             message_data['sender'], message_data['message']
         )
