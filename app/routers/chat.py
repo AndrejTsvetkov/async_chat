@@ -25,12 +25,12 @@ async def disconnect_redis() -> None:  # noqa: F811
 
 @router.get('/')
 def get_home() -> FileResponse:  # pragma: no cover (rendering template)
-    return FileResponse('static/home.html')
+    return FileResponse('app/static/home.html')
 
 
 @router.get('/chat')
 def get_chat() -> FileResponse:  # pragma: no cover (rendering template)
-    return FileResponse('static/chat.html')
+    return FileResponse('app/static/chat.html')
 
 
 @router.get(
