@@ -31,3 +31,21 @@ To view the latest messages go to:
 ```
 http://localhost:8000/history
 ```
+
+## Technologies Used
+
+- Python
+- Poetry
+- FastAPI
+- Aioredis
+- Pytest
+- JavaScript
+- jQuery
+- Git
+- GitHub
+- Docker
+- Docker Compose
+
+## Authors
+
+- [@AndrejTsvetkov](https://www.github.com/AndrejTsvetkov)
